@@ -1,0 +1,17 @@
+# Name of the vhost to create
+$vhost = "app"
+
+# VM IP
+$ip = "192.168.10.42"
+
+# Use NFS?
+$use_nfs = true
+
+# Base box name
+$base_box = ""
+
+# Which webserver do you want to use?
+# Valid choices are "nginx" and "apache2"
+#
+# Note: nginx implies the use of php-fpm
+$webserver = "nginx"
