@@ -1,5 +1,5 @@
 class app::php {
-    package {["php5", "php5-cli", "php5-dev", "php-apc", "php5-mysql"]:
+    package {["php5", "php5-cli", "php5-dev", "php-apc", "php5-mysql", "php-intl"]:
         ensure => present,
         notify => Service[$webserverService],
     }
