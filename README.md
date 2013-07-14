@@ -16,18 +16,18 @@
 
 -   Copy `vagrant/Personalization.dist` to `vagrant/Personalization` and modify `vagrant/Personalization` according to your needs.
 
-        Example:
+    Example:
+    ```ruby
+    $vhost = "test"
+    $ip = "192.168.10.42"
 
-        ```ruby
-            $vhost = "test"
-            $ip = "192.168.10.42"
+    $use_nfs = true
 
-            $use_nfs = true
+    $base_box = "ubuntu-server-i386"
 
-            $base_box = "ubuntu-server-i386"
-
-            $webserver = "nginx"
-        ```
+    $webserver = "nginx"
+    ```
+        
     -   Execute "vagrant up" in the directory vagrant.
 
 ## Infrastructure
