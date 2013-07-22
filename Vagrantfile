@@ -9,7 +9,7 @@ Vagrant::Config.run do |config|
 
   config.vm.host_name = $vhost + ".dev"
 
-  config.vm.network :hostonly, $ip
+  config.vm.network :private_network, ip: $ip
 
   config.vm.share_folder $vhost, "/srv/www/vhosts/" + $vhost + ".dev", "../", :nfs => $use_nfs
 
