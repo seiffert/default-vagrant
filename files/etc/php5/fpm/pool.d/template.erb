@@ -1,6 +1,6 @@
 [shelf]
 
-listen = /run/shm/<%= @vhost %>.phpfpm.socket
+listen = /run/shm/<%= @vhost %><%= @domain %>.phpfpm.socket
 user = vagrant
 group = users
 pm = static

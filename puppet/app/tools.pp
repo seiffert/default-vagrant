@@ -5,7 +5,9 @@ class app::tools {
               "strace",
               "patch",
               "git",
+              "mc",
               "vim",
+              "htop",
               "build-essential"]:
         ensure => present,
     }

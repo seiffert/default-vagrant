@@ -5,3 +5,5 @@ class app::webserver {
         include app::webserver::apache2
     }
 }
+
+import "webserver/*.pp"

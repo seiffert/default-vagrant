@@ -11,11 +11,11 @@ class app::php::fpm {
         require => [Package["php5-fpm"]],
     }
 
-    file {"/etc/php5/fpm/pool.d/$vhost.conf":
+    file {"/etc/php5/fpm/pool.d/$vhost$domain.conf":
         ensure => present,
         owner => root,
         group => root,
-        content => template("/vagrant/files/etc/php5/fpm/pool.d/app.conf"),
+        content => template("/vagrant/files/etc/php5/fpm/pool.d/template.erb"),
         require => [File["/etc/php5/fpm/pool.d"]],
         notify => Service["php5-fpm", "nginx"],
     }

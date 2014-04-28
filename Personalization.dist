@@ -1,5 +1,9 @@
 # Name of the vhost to create
 $vhost = "app"
+$domain = "dev"
+
+# Path of the vhost
+$vhostpath = "/var/www/"
 
 # VM IP
 $ip = "192.168.10.42"
@@ -8,7 +12,7 @@ $ip = "192.168.10.42"
 $use_nfs = true
 
 # Base box name
-$base_box = ""
+$base_box = "hashicorp-VAGRANTSLASH-precise64"
 
 # Which webserver do you want to use?
 # Valid choices are "nginx" and "apache2"

@@ -38,10 +38,10 @@ class app::webserver::nginx {
         notify => Service["nginx"],
     }
 
-    file {"/etc/nginx/vhosts.d/$vhost.dev.conf":
+    file {"/etc/nginx/vhosts.d/$vhost$domain.conf":
         owner => root,
         group => root,
-        content => template("/vagrant/files/etc/nginx/vhosts.d/app.dev.conf"),
+        content => template("/vagrant/files/etc/nginx/vhosts.d/template.erb"),
         require => Package["nginx"],
         notify => Service["nginx"],
     }

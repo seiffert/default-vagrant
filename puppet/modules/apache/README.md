@@ -35,7 +35,7 @@ logfile to an alternate location, might be:
         vhost_name      => '192.0.2.1',
         port            => '80',
         docroot         => '/home/www.example.com/docroot/',
-        logroot         => '/srv/www.example.com/logroot/',
+        logroot         => '/var/www.example.com/logroot/',
         serveradmin     => 'webmaster@example.com',
         serveraliases   => ['example.com',],
     }
@@ -53,7 +53,7 @@ Notes
 
 Since Puppet cannot ensure that all parent directories exist you need to
 manage these yourself. In the more advanced example above, you need to ensure 
-that `/home/www.example.com` and `/srv/www.example.com` directories exist.
+that `/home/www.example.com` and `/var/www.example.com` directories exist.
 
 Contributors
 ------------

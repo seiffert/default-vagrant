@@ -11,9 +11,9 @@ class app::webserver::apache2 {
         notify => Service["httpd"],
     }
 
-    file {"/etc/apache2/sites-enabled/$vhost":
+    file {"/etc/apache2/sites-enabled/$vhost$domain.conf":
         ensure => present,
-        content => template("/vagrant/files/etc/apache2/sites-available/app.dev"),
+        content => template("/vagrant/files/etc/apache2/sites-available/template.erb"),
         require => Package["httpd"],
         notify => Service["httpd"],
     }
