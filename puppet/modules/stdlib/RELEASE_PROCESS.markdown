@@ -22,3 +22,4 @@
  * Build a new package with puppet-module or the rake build task if it exists
  * Publish the new package to the forge
  * Bonus points for an announcement to puppet-users.
+
