@@ -12,3 +12,9 @@ php_value[post_max_size] = 600M
 php_value[upload_max_filesize] = 600M
 php_value[max_file_uploads] = 300
 php_flag[magic_quotes_gpc] = off
+php_flag[xdebug.remote_enable] = on
+php_value[xdebug.remote_handler] = dbgp
+php_value[xdebug.remote_host] = <%= @ip %>
+php_value[xdebug.remote_log] = <%= @vhostpath + "/" + @vhost + "." + @domain + "web/app/logs/xdebug.log" %>
+php_value[xdebug.remote_mode] = req
+php_value[xdebug.remote_port] = 9000
