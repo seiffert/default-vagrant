@@ -2,9 +2,9 @@ server {
     listen 80;
     server_name <%= @vhost %>.<%= @domain %>;
     root /var/www/vhosts/<%= @vhost %>.<%= @domain %>/web;
-    index app_<%= @domain %>.php;
-    access_log /var/www/vhosts/<%= @vhost %>.<%= @domain %>/app/logs/access.log;
-    error_log /var/www/vhosts/<%= @vhost %>.<%= @domain %>/app/logs/error.log;
+    index app_dev.php;
+    access_log <%= @vhostpath %>/<%= @vhost %>.<%= @domain %>/app/logs/access.log;
+    error_log <%= @vhostpath %>/<%= @vhost %>.<%= @domain %>/app/logs/error.log;
 
     location  /favicon.ico {
         return 204;
@@ -33,10 +33,10 @@ server {
     listen 443 ssl;
 
     server_name <%= @vhost %>.<%= @domain %>;
-    root /var/www/vhosts/<%= @vhost %>.<%= @domain %>/web;
-    index app_<%= @domain %>.php;
-    access_log /var/www/vhosts/<%= @vhost %>.<%= @domain %>/app/logs/ssl_access.log;
-    error_log /var/www/vhosts/<%= @vhost %>.<%= @domain %>/app/logs/ssl_error.log;
+    root <%= @vhostpath %>/<%= @vhost %>.<%= @domain %>/web;
+    index app_dev.php;
+    access_log <%= @vhostpath %>/<%= @vhost %>.<%= @domain %>/app/logs/ssl_access.log;
+    error_log <%= @vhostpath %>/<%= @vhost %>.<%= @domain %>/app/logs/ssl_error.log;
 
     ssl on;
     ssl_certificate /etc/ssl/private/<%= @vhost %><%= @domain %>.crt;
