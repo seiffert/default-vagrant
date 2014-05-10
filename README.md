@@ -1,6 +1,15 @@
 # My Vagrant/Puppet Default Setup 
 
 ## NEWS 
+- Apache SSL support
+- Apache & Stdlib module upgrade
+- New concat module
+- MySQL custom user, password, database support
+- MySQL custom root password
+- Xdebug support only phpfpm
+- Small bugfix
+
+## Archive
 - Nginx SSL support
 - Vagrant v2 support
 - Automatic ssl certificate generation
@@ -48,5 +57,4 @@ After performing the steps listed above, you will have the following environment
 - You can now start customizing the new virtual machine. In most cases, the machine should correspond to the infrastructure your production server(s) provide.
 
 ## TODO
-- Apache SSL support
-- Apache PHPFPM support
+- Centos/Redhat Support
