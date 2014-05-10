@@ -20,7 +20,7 @@ host { 'localhost':
 class { "mysql": }
 class { "mysql::server":
     config_hash => {
-        "root_password" => $vhost,
+        "root_password" => "$mysql_rootpassword",
         "etc_root_password" => true,
     }
 }

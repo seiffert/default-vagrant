@@ -3,7 +3,14 @@ $vhost = "app"
 $domain = "dev"
 
 # Path of the vhost
-$vhostpath = "/var/www/"
+$vhostpath = "/var/www/vhosts"
+
+# Mysql
+$mysql_rootpassword = "app"
+$mysql_user = "app"
+$mysql_password = "app"
+$mysql_database = "app"
+
 
 # VM IP
 $ip = "192.168.10.42"
@@ -12,7 +19,7 @@ $ip = "192.168.10.42"
 $use_nfs = true
 
 # Base box name
-$base_box = "hashicorp-VAGRANTSLASH-precise64"
+$base_box = ""
 
 # Which webserver do you want to use?
 # Valid choices are "nginx" and "apache2"

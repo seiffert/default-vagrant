@@ -13,7 +13,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.network "private_network", ip: $ip
 
-  config.vm.synced_folder  "../", $vhostpath + "vhosts/" + $vhost + "." + $domain, type: "nfs"
+  config.vm.synced_folder  "../", $vhostpath + "/" + $vhost + "." + $domain, type: "nfs"
 
   config.vm.provider "virtualbox" do |v|
     v.customize ["modifyvm", :id, "--cpuexecutioncap", "50"]
@@ -29,7 +29,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
                                 "vhost" => $vhost,
                                 "domain" => $domain,
                                 "webserver" => $webserver,
-                                "vhostpath" => $vhostpath
+                                "vhostpath" => $vhostpath,
+                                "mysql_rootpassword" => $mysql_rootpassword,
+                                "mysql_user" => $mysql_user,
+                                "mysql_password" => $mysql_password,
+                                "mysql_database" => $mysql_database,
                               }
   end
 end
