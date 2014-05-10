@@ -3,7 +3,16 @@ class app::webserver::nginx {
         ensure => latest,
     }
 
-    package {"httpd":
+    case $::osfamily {
+        Redhat: {
+            $apache2_package = "httpd"
+        }
+        Debian: {
+            $apache2_package = "apache2"
+        }
+    }
+
+    package {"$apache2_package":
         ensure => purged,
     }
 
@@ -11,7 +20,7 @@ class app::webserver::nginx {
         ensure => running,
         hasrestart => true,
         hasstatus => true,
-        require => [Package["nginx"], Package["httpd"]],
+        require => Package["nginx"],
     }
 
     file {"/etc/nginx/vhosts.d":
