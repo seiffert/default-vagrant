@@ -1,6 +1,16 @@
 # My Vagrant/Puppet Default Setup 
 
 ## NEWS 
+- Add jfryman/nginx module
+- Dropped old nginx module
+- PHPFPM slow querylog
+- New tools package from tcpdump
+
+## Archive
+- Nginx SSL support
+- Vagrant v2 support
+- Automatic ssl certificate generation
+- Custom domain support
 - Apache SSL support
 - Apache & Stdlib module upgrade
 - New concat module
@@ -8,13 +18,6 @@
 - MySQL custom root password
 - Xdebug support only phpfpm
 - Small bugfix
-
-## Archive
-- Nginx SSL support
-- Vagrant v2 support
-- Automatic ssl certificate generation
-- Custom domain support
-
 
 ## Setup
 
@@ -53,7 +56,7 @@ After performing the steps listed above, you will have the following environment
 
 - A running virtual machine with your project on it
 - Your project directory will be mounted as a shared folder in this virtual machine
-- Your project will be accessible via a browser (go to `http://{$vhost}.${$domain}/[app_dev.php]` or `https://{$vhost}.${$domain}/[app_dev.php]` )
+- Your project will be accessible via a browser (go to `http://{$vhost}.{$domain}/[app_dev.php]` or `https://{$vhost}.{$domain}/[app_dev.php]` )
 - You can now start customizing the new virtual machine. In most cases, the machine should correspond to the infrastructure your production server(s) provide.
 
 ## TODO
