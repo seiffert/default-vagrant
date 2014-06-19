@@ -3,6 +3,7 @@ class app::tools {
               "zip",
               "unzip",
               "strace",
+              "tcpdump",
               "patch",
               "git",
               "mc",
