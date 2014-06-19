@@ -1,6 +1,9 @@
 Exec { path => ['/usr/local/bin', '/opt/local/bin', '/usr/bin', '/usr/sbin', '/bin', '/sbin'], logoutput => true }
 Package { require => Exec['apt_update'], }
-exec {"apt_update": command => '/usr/bin/apt-get update', }
+
+class { 'apt':
+  always_apt_update    => true
+}
 
 import "app/*.pp"
 
@@ -33,3 +36,4 @@ include app::webserver
 include app::tools
 include app::database
 include app::ssl
+
