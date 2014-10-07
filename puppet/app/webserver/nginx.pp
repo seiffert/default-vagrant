@@ -1,5 +1,6 @@
 class app::webserver::nginxserver {
 require app::ssl
+
 class { 'nginx': }
 
 
@@ -22,8 +23,8 @@ nginx::resource::vhost { "$vhost.$domain":
   index_files => [ 'app_dev.php'],
   try_files   => [ '$uri', '@rewriteindex'],
   ssl         => true,
-  ssl_cert    => "/etc/ssl/private/$vhost$domain.crt",
-  ssl_key     => "/etc/ssl/private/$vhost$domain.key",
+  ssl_cert    => "$sslpath/$vhost$domain.crt",
+  ssl_key     => "$sslpath/$vhost$domain.key",
   access_log  => "$vhostpath/$vhost.$domain/app/logs/access.log",
   error_log   => "$vhostpath/$vhost.$domain/app/logs/error.log",
 }
@@ -46,7 +47,7 @@ nginx::resource::location { 'location-phpfpm':
       www_root        => "$vhostpath/$vhost.$domain/web",
       location        => '~ ^/(app|app_dev)\.php(/|$)',
       proxy           => undef,
-      fastcgi         => "unix:/run/shm/$vhost$domain.phpfpm.socket",
+      fastcgi         => "unix:$fpmsocketpath/$vhost$domain.phpfpm.socket",
       location_cfg_append => {
         fastcgi_connect_timeout => '3m',
         fastcgi_read_timeout    => '3m',

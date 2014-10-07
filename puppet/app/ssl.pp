@@ -11,7 +11,7 @@ openssl::certificate::x509 { "$vhost$domain":
   unit         => 'IT Depermant',
   email        => "developer@$vhost.$domain",
   days         => 3456,
-  base_dir     => '/etc/ssl/private',
+  base_dir     => "$sslpath",
   owner        => 'root',
   force        => false,
 }

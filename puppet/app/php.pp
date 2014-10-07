@@ -2,21 +2,46 @@ class app::php {
   
   case $::osfamily {
     Redhat: {
-        $php_package = ["php", "php-dev", "php-mysql", "php-intl", "php-curl", "php-xdebug"]
-    }
+        require epel
+        $php_package = ["php", "php-devel", "php-intl", "php-pear-Net-Curl", "php-pecl-xdebug","php-xml"]
+          
+          if 'mysql' == $database {
+            package {
+                "php-mysql":
+                    ensure => present
+                }
+           }
+
+          if 'postgresql' == $database {
+            package {
+                "php-pgsql":
+                    ensure => present
+                }
+            }
+        }
     Debian: {
-        $php_package = ["php5", "php5-cli", "php5-dev", "php5-mysql", "php5-intl", "php5-curl", "php5-xdebug"]
+        $php_package = ["php5", "php5-cli", "php5-dev", "php5-intl", "php5-curl", "php5-xdebug"]
+
+          if 'mysql' == $database {
+            package {
+                "php5-mysql":
+                    ensure => present
+                }
+           }
+
+          if 'postgresql' == $database {
+            package {
+                "php5-pgsql":
+                    ensure => present
+                }
+            }
+        }
     }
-  }
+
   
     package { $php_package:
         ensure => present,
         notify => Service[$webserverService],
-    }
-
-    exec {"clear-symfony-cache":
-        require => Package["php5-cli"],
-        command => "/bin/bash -c 'cd $vhostpath/$vhost.$domain && /usr/bin/php app/console cache:clear --env=dev && /usr/bin/php app/console cache:clear --env=prod'",
     }
 
     if 'nginx' == $webserver {

@@ -4,6 +4,7 @@ class app::webserver {
     } else {
         include app::webserver::apache2
     }
+
 }
 
 import "webserver/*.pp"

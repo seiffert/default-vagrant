@@ -2,7 +2,13 @@ class app::webserver::apache2 {
     class { "apache": mpm_module => 'prefork', default_mods => true, default_confd_files => false, default_vhost => false, }
     class { "apache::mod::php": }
     class { "apache::mod::ssl": }
-    class { "apache::mod::rewrite": }
+
+    case $::osfamily {
+        Debian: {
+              class { "apache::mod::rewrite": }
+            }
+    }
+
 
     apache::listen { '80': }
     apache::listen { '443': }
@@ -26,8 +32,8 @@ class app::webserver::apache2 {
       port     => '443',
       docroot  => "$vhostpath/$vhost.$domain/web",
       ssl      => true,
-      ssl_cert => "/etc/ssl/private/$vhost$domain.crt",
-      ssl_key  => "/etc/ssl/private/$vhost$domain.key",
+      ssl_cert => "$sslpath/$vhost$domain.crt",
+      ssl_key  => "$sslpath/$vhost$domain.key",
       directories   => { path => "$vhostpath/$vhost.$domain/web", allow_override => ['AuthConfig', 'Indexes', 'FileInfo', 'Options' ], },
       access_log_file => "ssl_access.log",
       error_log_file => "ssl_error.log",

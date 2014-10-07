@@ -1,6 +1,6 @@
 [shelf]
 
-listen = /run/shm/<%= @vhost %><%= @domain %>.phpfpm.socket
+listen = <%= @fpmsocketpath %>/<%= @vhost %><%= @domain %>.phpfpm.socket
 user = vagrant
 group = users
 pm = static
@@ -18,3 +18,4 @@ php_value[xdebug.remote_host] = <%= @ip %>
 php_value[xdebug.remote_log] = <%= @vhostpath + "/" + @vhost + "." + @domain + "/app/logs/xdebug.log" %>
 php_value[xdebug.remote_mode] = req
 php_value[xdebug.remote_port] = 9000
+php_value[date.timezone] = <%= @timezone %>
