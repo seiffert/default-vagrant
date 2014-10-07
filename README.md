@@ -1,10 +1,10 @@
 # My Vagrant/Puppet Default Setup 
 
 ## NEWS 
-- Add jfryman/nginx module
-- Dropped old nginx module
-- PHPFPM slow querylog
-- New tools package from tcpdump
+- Postfix support
+- SMTP support ( GMail & Mailgun tested )
+- Centos 6 
+- PHP timezone ( only FPM )
 
 ## Archive
 - Nginx SSL support
@@ -18,6 +18,17 @@
 - MySQL custom root password
 - Xdebug support only phpfpm
 - Small bugfix
+- Add jfryman/nginx module
+- Dropped old nginx module
+- PHPFPM slow querylog
+- New tools package from tcpdump
+
+## Tested
+Ubuntu 12.04/14.04
+Centos 6
+
+## NOTE
+- GMail: https://support.google.com/mail/bin/answer.py?answer=78754
 
 ## Setup
 
@@ -29,6 +40,9 @@
 
 -   Get a base box with puppet support
     see [vagrantup.com docs](http://docs.vagrantup.com/v2/getting-started/boxes.html)
+
+-   Get a custom box with puppet support
+    see [pigri/vagrantboxes](https://github.com/pigri/vagrant-boxes)
 
 -   Get a copy of this repository. You can do this either by integrating it as a git submodule or by just checking it out and copying the files. 
     Prefarably, the contents of this repository should be placed in a directory `vagrant` inside your project's root dir.
@@ -43,7 +57,7 @@
 
     $use_nfs = true
 
-    $base_box = "hashicorp-VAGRANTSLASH-precise64"
+    $base_box = "ubuntu-14.04-server-amd64"
 
     $webserver = "nginx"
     ```
@@ -60,4 +74,4 @@ After performing the steps listed above, you will have the following environment
 - You can now start customizing the new virtual machine. In most cases, the machine should correspond to the infrastructure your production server(s) provide.
 
 ## TODO
-- Centos/Redhat Support
+- Debian support
