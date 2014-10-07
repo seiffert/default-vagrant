@@ -1,48 +1,62 @@
-class app::webserver::nginx {
-    package {"nginx":
-        ensure => latest,
+class app::webserver::nginxserver {
+require app::ssl
+
+class { 'nginx': }
+
+
+    case $::osfamily {
+        Redhat: {
+            $apache2_package = "httpd"
+        }
+        Debian: {
+            $apache2_package = "apache2"
+        }
     }
 
-    package {"httpd":
+    package {"$apache2_package":
         ensure => purged,
     }
 
-    service {"nginx":
-        ensure => running,
-        hasrestart => true,
-        hasstatus => true,
-        require => [Package["nginx"], Package["httpd"]],
-    }
+nginx::resource::vhost { "$vhost.$domain":
+  ensure => 'present',
+  www_root => "$vhostpath/$vhost.$domain/web",
+  index_files => [ 'app_dev.php'],
+  try_files   => [ '$uri', '@rewriteindex'],
+  ssl         => true,
+  ssl_cert    => "$sslpath/$vhost$domain.crt",
+  ssl_key     => "$sslpath/$vhost$domain.key",
+  access_log  => "$vhostpath/$vhost.$domain/app/logs/access.log",
+  error_log   => "$vhostpath/$vhost.$domain/app/logs/error.log",
+}
 
-    file {"/etc/nginx/vhosts.d":
-        ensure => directory,
-        owner => root,
-        group => root,
-        recurse => true,
-        require => Package["nginx"],
-    }
+nginx::resource::location { 'location-rewriteindex':
+    ensure  => present,
+    ssl     => true,
+    vhost   => "$vhost.$domain",
+    www_root    => "$vhostpath/$vhost.$domain/web",
+    location    => '@rewriteindex',
+    rewrite_rules => ['^(.*)$ /app.php/$1 last'],
 
-    file {"/etc/nginx/fastcgi_params":
-        owner => root,
-        group => root,
-        source => "/vagrant/files/etc/nginx/fastcgi_params",
-        require => Package["nginx"],
-        notify => Service["nginx"],
-    }
+}
 
-    file {"/etc/nginx/nginx.conf":
-        owner => root,
-        group => root,
-        source => "/vagrant/files/etc/nginx/nginx.conf",
-        require => Package["nginx"],
-        notify => Service["nginx"],
-    }
 
-    file {"/etc/nginx/vhosts.d/$vhost.dev.conf":
-        owner => root,
-        group => root,
-        content => template("/vagrant/files/etc/nginx/vhosts.d/app.dev.conf"),
-        require => Package["nginx"],
-        notify => Service["nginx"],
-    }
+nginx::resource::location { 'location-phpfpm':
+      ensure          => present,
+      ssl             => true,
+      vhost           => "$vhost.$domain",
+      www_root        => "$vhostpath/$vhost.$domain/web",
+      location        => '~ ^/(app|app_dev)\.php(/|$)',
+      proxy           => undef,
+      fastcgi         => "unix:$fpmsocketpath/$vhost$domain.phpfpm.socket",
+      location_cfg_append => {
+        fastcgi_connect_timeout => '3m',
+        fastcgi_read_timeout    => '3m',
+        fastcgi_send_timeout    => '3m',
+        fastcgi_split_path_info => '^(.+\.php)(/.*)$',
+        include                 => 'fastcgi_params',
+        fastcgi_param           =>  'SCRIPT_FILENAME $document_root$fastcgi_script_name',
+      }
+}
+    
+
 }
