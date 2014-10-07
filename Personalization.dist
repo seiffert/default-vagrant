@@ -5,12 +5,17 @@ $domain = "dev"
 # Path of the vhost
 $vhostpath = "/var/www/vhosts"
 
-# Mysql
-$mysql_rootpassword = "app"
-$mysql_user = "app"
-$mysql_password = "app"
-$mysql_database = "app"
+# Database
+$database_rootpassword = ""
+$database_user = ""
+$database_password = ""
+$database_name = ""
 
+# SMTP
+$mail_server = ""
+$mail_port = ""
+$mail_username = ""
+$mail_password = ""
 
 # VM IP
 $ip = "192.168.10.42"
@@ -26,3 +31,12 @@ $base_box = ""
 #
 # Note: nginx implies the use of php-fpm
 $webserver = "nginx"
+
+# Which database server do you want to use?
+# Valid choices are "mysql" and "postgresql"
+#
+$database = "postgresql"
+
+# Advanced settings
+$cpu = "1"
+$memory = "1024"
