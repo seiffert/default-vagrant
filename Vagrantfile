@@ -17,8 +17,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.provider "virtualbox" do |v|
     v.customize ["modifyvm", :id, "--cpuexecutioncap", "50"]
-    v.memory = 512
-    v.cpus = 1
+    v.memory = $memory
+    v.cpus = $cpu
   end
 
   config.vm.provision :puppet do |puppet|
@@ -30,10 +30,16 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
                                 "domain" => $domain,
                                 "webserver" => $webserver,
                                 "vhostpath" => $vhostpath,
-                                "mysql_rootpassword" => $mysql_rootpassword,
-                                "mysql_user" => $mysql_user,
-                                "mysql_password" => $mysql_password,
-                                "mysql_database" => $mysql_database,
+                                "database_rootpassword" => $database_rootpassword,
+                                "database_user" => $database_user,
+                                "database_password" => $database_password,
+                                "database_name" => $database_name,
+                                "database" => $database,
+                                "mail_server" => $mail_server,
+                                "mail_port" => $mail_port,
+                                "mail_username" => $mail_username,
+                                "mail_password" => $mail_password,
+                                "timezone" => $timezone
                               }
   end
 end
