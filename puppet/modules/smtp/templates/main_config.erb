@@ -1,0 +1,20 @@
+inet_interfaces = <%= @bind_ip %>
+inet_protocols = ipv4
+
+mail_owner = <%= @mail_owner %>
+myhostname = <%= @hostname %>
+mydomain = <%= @domain %>
+myorigin = $mydomain
+mydestination = $myhostname, localhost.$mydomain, localhost, $mydomain
+smtpd_banner = <%= @hostname %>.<%= @domain %> ESMTP
+
+relayhost = <%= @smtp_server%>:<%= @smtp_port %>
+smtp_sasl_auth_enable = yes
+smtp_sasl_mechanism_filter = plain
+smtp_sasl_password_maps = static:<%= @smtp_username %>:<%= @smtp_password %>
+smtp_sasl_security_options = noanonymous
+smtp_use_tls = yes
+
+alias_maps = hash:/etc/aliases
+recipient_delimiter = +
+smtp_host_lookup = dns, native
